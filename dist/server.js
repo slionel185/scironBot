@@ -4,10 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.bot = void 0;
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
-const https_1 = __importDefault(require("https"));
 const helmet_1 = __importDefault(require("helmet"));
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
@@ -30,6 +27,6 @@ exports.bot.connect().catch((err) => {
     throw new Error(err);
 });
 exports.bot.on('message', messageHandler_1.default);
-//app.listen(env.PORT)
-https_1.default.createServer({ key: fs_1.default.readFileSync(path_1.default.join(__dirname, 'certs', 'server.key')), cert: fs_1.default.readFileSync(path_1.default.join(__dirname, 'certs', 'server.cert')) }, app).listen(_env_1.env.PORT, () => console.log(`Server listening on Port: ${_env_1.env.PORT}`));
+app.listen(_env_1.env.PORT);
+//https.createServer({ key: fs.readFileSync(path.join(__dirname, 'certs', 'server.key')), cert: fs.readFileSync(path.join(__dirname, 'certs', 'server.cert')) }, app).listen(env.PORT, () => console.log(`Server listening on Port: ${env.PORT}`))
 exports.default = app;
