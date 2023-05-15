@@ -27,6 +27,6 @@ exports.bot.connect().catch((err) => {
     throw new Error(err);
 });
 exports.bot.on('message', messageHandler_1.default);
-app.listen(_env_1.env.PORT);
+app.listen(_env_1.env.PORT, () => console.log(`Server listening on Port: ${_env_1.env.PORT}`));
 //https.createServer({ key: fs.readFileSync(path.join(__dirname, 'certs', 'server.key')), cert: fs.readFileSync(path.join(__dirname, 'certs', 'server.cert')) }, app).listen(env.PORT, () => console.log(`Server listening on Port: ${env.PORT}`))
 exports.default = app;

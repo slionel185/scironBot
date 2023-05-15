@@ -37,7 +37,7 @@ bot.connect().catch((err: any) => {
 
 bot.on('message', messageHandler)
 
-app.listen(env.PORT)
+app.listen(env.PORT, () => console.log(`Server listening on Port: ${env.PORT}`))
 //https.createServer({ key: fs.readFileSync(path.join(__dirname, 'certs', 'server.key')), cert: fs.readFileSync(path.join(__dirname, 'certs', 'server.cert')) }, app).listen(env.PORT, () => console.log(`Server listening on Port: ${env.PORT}`))
 
 export default app
