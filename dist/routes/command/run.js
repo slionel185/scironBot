@@ -15,16 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = require("../../utils/db");
 const forceCommandHandler_1 = __importDefault(require("../../handlers/forceCommandHandler"));
 const run = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { channel, commandId } = req.body;
-    console.log('Running');
+    const { channel, commandId, args } = req.body;
     try {
         const command = yield db_1.prisma.command.findFirst({
             where: {
                 id: commandId
+            },
+            include: {
+                User: true
             }
         });
+        if (!command)
+            return res.json({
+                status: 404
+            });
         if (command)
-            (0, forceCommandHandler_1.default)(channel, command);
+            (0, forceCommandHandler_1.default)(channel, command, command.User, args);
         return res.json({
             status: 200
         });

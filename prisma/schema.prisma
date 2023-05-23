@@ -46,6 +46,7 @@ model User {
   emailVerified DateTime?
   image         String?
   commandPrefix String    @default("!")
+  chatMode      CHAT_MODE @default(NORMAL)
   accounts      Account[]
   commands      Command[]
   sessions      Session[]
@@ -62,6 +63,7 @@ model Command {
   commandUserLevel COMMAND_USER_LEVEL   @default(USER)
   actionType       COMMAND_ACTION_TYPES @default(COMMERCIAL)
   description      String               @default("Oops")
+  args             String
   User             User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -85,5 +87,14 @@ enum COMMAND_USER_LEVEL {
 }
 
 enum COMMAND_ACTION_TYPES {
+  CHAT
   COMMERCIAL
+}
+
+enum CHAT_MODE {
+  NORMAL
+  SUB_ONLY
+  EMOTE_ONLY
+  FOLLOWER_ONLY
+  SLOW
 }

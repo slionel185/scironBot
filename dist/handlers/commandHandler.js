@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const server_1 = require("../server");
+const chat_1 = __importDefault(require("../controllers/actions/chat"));
 const commercial_1 = __importDefault(require("../controllers/actions/commercial"));
 const commandHandler = (channel, tags, message, user, commands) => __awaiter(void 0, void 0, void 0, function* () {
     const commandName = message.split(user.commandPrefix)[1].split(' ')[0].toLowerCase();
@@ -36,6 +37,8 @@ const commandHandler = (channel, tags, message, user, commands) => __awaiter(voi
         if (command.commandAction === 'REPLY' && command.commandReply)
             server_1.bot.say(channel, command.commandReply);
         if (command.commandAction === 'ACTION' && command.actionType) {
+            if (command.actionType === 'CHAT')
+                return (0, chat_1.default)(channel, command);
             if (command.actionType === 'COMMERCIAL')
                 return (0, commercial_1.default)(channel);
         }

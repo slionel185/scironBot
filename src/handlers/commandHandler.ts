@@ -1,10 +1,8 @@
 import type { ChatUserstate } from 'tmi.js'
 import type { User, Command } from '@prisma/client'
 
-import type CommandType from '@/types/command'
-
 import { bot } from '@/server'
-
+import chat from '@/controllers/actions/chat'
 import commercial from '@/controllers/actions/commercial'
 
 const commandHandler = async (channel: string, tags: ChatUserstate, message: string, user: User, commands: Command[]) => {
@@ -17,7 +15,7 @@ const commandHandler = async (channel: string, tags: ChatUserstate, message: str
     }
 
     const filteredCommands: Command[] = commands.filter(commandItem => filterByCommand(commandName, commandItem))
-    const command = filteredCommands[0] as unknown as CommandType
+    const command: Command = filteredCommands[0]
 
     try {
         if(filteredCommands.length < 1 && (tags.username === channel.split('#')[1] || tags.mod)) return bot.say(channel, 'No commands found with that name.') 
@@ -30,6 +28,7 @@ const commandHandler = async (channel: string, tags: ChatUserstate, message: str
         if(command.commandAction === 'REPLY' && command.commandReply) bot.say(channel, command.commandReply)
 
         if(command.commandAction === 'ACTION' && command.actionType) {
+            if(command.actionType === 'CHAT') return chat(channel, command)
             if(command.actionType === 'COMMERCIAL') return commercial(channel)
         }
 

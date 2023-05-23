@@ -9,13 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const server_1 = require("../../server");
-const commercial = (channel) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield server_1.bot.commercial(channel, 60);
-    }
-    catch (err) {
-        server_1.bot.say(channel, 'Error running command on this channel.');
-    }
+const chat = (channel, command) => __awaiter(void 0, void 0, void 0, function* () {
+    const chatArgs = command;
+    console.log(chatArgs);
 });
-exports.default = commercial;
+exports.default = chat;
