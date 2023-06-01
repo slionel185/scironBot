@@ -28,7 +28,7 @@ const commandHandler = async (channel: string, tags: ChatUserstate, message: str
         if(command.commandAction === 'REPLY' && command.commandReply) bot.say(channel, command.commandReply)
 
         if(command.commandAction === 'ACTION' && command.actionType) {
-            if(command.actionType === 'CHAT') return chat(channel, command)
+            if(command.actionType === 'CHAT') return chat(channel, command, user)
             if(command.actionType === 'COMMERCIAL') return commercial(channel)
         }
 

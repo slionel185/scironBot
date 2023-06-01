@@ -9,7 +9,7 @@ const forceCommandHandler = async (channel: string, command: Command, user: User
     if(command.commandAction === 'REPLY' && command.commandReply) return bot.say(channel, command.commandReply)
 
     if(command.commandAction === 'ACTION' && command.actionType) {
-        if(command.actionType === 'CHAT') return chat(channel, command)
+        if(command.actionType === 'CHAT') return chat(channel, command, user)
         if(command.actionType === 'COMMERCIAL') return await commercial(channel)
     }
 }
