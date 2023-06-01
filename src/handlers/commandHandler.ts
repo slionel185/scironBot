@@ -33,6 +33,7 @@ const commandHandler = async (channel: string, tags: ChatUserstate, message: str
         }
 
     } catch(err: any) {
+        console.log(err)
         bot.say(channel, 'Oops that broke something!')
     }
 }
