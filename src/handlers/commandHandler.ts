@@ -22,6 +22,7 @@ const commandHandler = async (channel: string, tags: ChatUserstate, message: str
         if(filteredCommands.length > 1 && (tags.username === channel.split('#')[1] || tags.mod)) return bot.say(channel, 'You have too many commands with the same name.')
 
         if(!command.active && (tags.username === channel.split('#')[1] || tags.mod)) return bot.say(channel, 'This command is not active. You can activate it on your Sciron dashboard!')
+        if(!command.active && (tags.username !== channel.split('#')[1] || !tags.mod)) return bot.say(channel, 'This command is not active.')
 
         if((command.commandUserLevel === 'MODERATOR' || command.commandUserLevel === 'BROADCASTER') && (!tags.mod || tags.username !== channel.split('#')[1])) return bot.say(channel, 'Elevated priviledges needed for that command.')
 
